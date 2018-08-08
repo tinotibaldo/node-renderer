@@ -1,0 +1,35 @@
+{
+  "name": "node-ref",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "latest",
+    "canvas": "^1.6.11",
+    "child_process": "^1.0.2",
+    "cors": "^2.8.4",
+    "ejs": "^2.5.1",
+    "express": "^4.16.3",
+    "express-ejs-layouts": "^2.2.0",
+    "get-pixels": "^3.3.2",
+    "gl": "^4.0.4",
+    "js2xmlparser": "^3.0.0",
+    "mock-browser": "^0.92.14",
+    "mongojs": "^2.5.0",
+    "ndarray": "^1.0.18",
+    "node-webgl": "^0.5.5",
+    "nodemon": "^1.10.2",
+    "pkg-config": "^1.1.1",
+    "requirejs": "^2.3.5",
+    "save-pixels": "^2.3.4",
+    "three": "^0.94.0",
+    "three-png-stream": "^1.0.3",
+    "web-midi-api": "^2.0.1"
+  }
+}
