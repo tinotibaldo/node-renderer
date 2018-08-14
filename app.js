@@ -7,7 +7,7 @@ const THREE = require("three");
 global.THREE = THREE;
 
 //a navigator to be used internally
-const window = {innerWidth: 1024, innerHeight: 1024};
+const window = {innerWidth: 64, innerHeight: 64};
 global.navigator = require('web-midi-api');
 // out tool to export the scene into an image
 const pngStream = require('three-png-stream');
@@ -23,8 +23,8 @@ function init() {
   // mock function to avoid errors inside THREE.WebGlRenderer()
   canvasGL.addEventListener = function(event, func, bind_) {};
 
-  renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true, context: glContext, antialias: true, canvas: canvasGL });
-  renderer.setClearColor(0xff0000, 1);
+  renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true, context: glContext, antialias: false, canvas: canvasGL });
+  renderer.setClearColor('green', 1);
   //
   renderer.autoClear = false;
   renderer.clear()
@@ -62,7 +62,8 @@ function renderAndExport(exportPath, delay = 0) {
     console.log('rendering...');
     render();
     console.log('exporting...');
-    exportImage(exportPath);
+    //exportImage(exportPath);
+	setTimeout(function(){exportImage(exportPath);}, 1000)
     console.log('done');
   };
 
@@ -77,22 +78,6 @@ function renderAndExport(exportPath, delay = 0) {
 init();
 
 
-const load_texture = (texture_path, property, where) => {
-  getPixels(__dirname + texture_path, function(err, pixels) {
-
-      if(err) {
-        console.log("Failed to load texture using get-pixels:", err);
-        return;
-      }
-
-      var texture = new THREE.DataTexture( new Uint8Array(pixels.data), pixels.shape[0], pixels.shape[1], THREE.RGBAFormat);
-      texture.needsUpdate = true;
-
-      property[where] = texture;
-
-  });
-}
-
 const objects_to_display = () => {
 
   const obj = new THREE.Object3D();
@@ -105,13 +90,13 @@ const objects_to_display = () => {
   obj.add(ambient_light);
   // untextured purple plane
   let geometry = new THREE.BoxGeometry( 10, 10, 10);
-  let material = new THREE.MeshPhongMaterial({ color: 0x0000ff, side: THREE.DoubleSide });
+  let material = new THREE.MeshPhongMaterial({ color: 0x0000ff });
   cube = new THREE.Mesh( geometry, material );
   cube.position.z = -20
   cube.rotation.y = Math.PI * 0.25
   obj.add( cube );
 
-  material = new THREE.MeshPhongMaterial({ color : 0xffffff, side: THREE.DoubleSide });
+  material = new THREE.MeshPhongMaterial({ color : 0xffffff});
   var texture_cube = new THREE.Mesh( geometry, material );
   texture_cube.position.y = 10;
   texture_cube.position.z = -20;
@@ -119,7 +104,7 @@ const objects_to_display = () => {
   texture_cube.scale.set(0.7, -0.7, 0.7);
 
   obj.add( texture_cube );
-  load_texture('/texture.jpg', texture_cube.material, 'map');
+/*   load_texture('/texture.jpg', texture_cube.material, 'map'); */
   // TEXTURE LOADERS ////////////////////////////////////////////////////////////////////////
   return obj;
 
@@ -130,4 +115,4 @@ const obj2 = objects_to_display();
 obj2.position.x += 20;
 scene.add(obj2);
 
-renderAndExport("./image2.png", 200);
+renderAndExport("./image2.png");

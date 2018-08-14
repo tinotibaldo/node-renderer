@@ -1,11 +1,15 @@
 # node-renderer
-A small threejs project for testing scene directly in node
+A small threejs project for testing scene directly in node with an accompanying docker file for a VM
 
 
 # how to run
 
 1 - clone this repo
-2 - npm install
+2 - Use the docker file to build a docker container - Once the container is built mount the files of this path in the src of the 
+docker container 
+2 - npm install in the src of the docker container (the docker container installs headless gl so you don't need to npm install it)
+3 - Within the src folder do "npm install -g node-gyp" , then under node_modules/canvas run - node-gyp rebuild you need to 
+rebuild the node-gyp npm install
 3 - node app.js
 
 # how to render ? 
