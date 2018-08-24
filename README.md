@@ -1,8 +1,7 @@
 # node-renderer
-A small threejs project for testing scene directly in node with an accompanying docker file for a VM
+A small threejs project for testing scene directly in node with an accompanying docker file for a VM - Unfortunately I am struggling to get the dependencies in docker right
 
-
-# how to run
+# how to run (works sometimes to produce a blank png)
 
 1 - clone this repo
 
